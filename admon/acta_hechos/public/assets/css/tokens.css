@@ -1,0 +1,76 @@
+/* =========================================
+   TOKENS DE DISEÑO
+   Fuente única de verdad de la paleta.
+   Este archivo se carga ANTES que la hoja
+   específica de cada pantalla.
+   ========================================= */
+
+:root {
+
+    /* ---------------------------------------
+       MARCA INSTITUCIONAL
+    --------------------------------------- */
+
+    --vino: #c9a227;
+    --vino-hover: #ffd700;
+    --vino-oscuro: #8b6f12;
+    --vino-claro: #332b12;
+
+    --dorado: #c9a227;
+    --dorado-brillante: #ffd700;
+    --rojo-cierre: #8b0000;
+    --rojo-cierre-brillante: #ff0000;
+    --azul-facebook: #1877f2;
+    --rosa-instagram: #e1306c;
+    --rojo-youtube: #ff0000;
+
+    /* ---------------------------------------
+       NEUTROS
+    --------------------------------------- */
+
+    --negro: #000000;
+    --negro-suave: #1a1a1a;
+    --negro-terciario: #111111;
+
+    --blanco: #ffffff;
+
+    --gris-fondo: #111111;
+    --gris-claro: #1a1a1a;
+    --gris-borde: #444444;
+    --gris-texto: #dddddd;
+    --gris-menu: #dddddd;
+
+    --crema: #1a1a1a;
+
+    /* ---------------------------------------
+       ALIAS
+       Nombres históricos de acta_hechos.css,
+       resueltos desde los tokens de arriba.
+    --------------------------------------- */
+
+    --brand: var(--vino);
+    --brand-strong: var(--vino-hover);
+    --gold: var(--dorado);
+
+    --bg: var(--gris-fondo);
+    --surface: var(--negro-suave);
+    --surface-soft: var(--crema);
+    --ink: var(--blanco);
+    --muted: var(--gris-texto);
+    --line: var(--gris-borde);
+    --focus: rgba(255, 215, 0, 0.25);
+
+}
+/* Colores por función: superficies claras y contraste de acciones doradas. */
+:root {
+    --superficie-clara: #ffffff;
+    --texto-en-claro: #20252c;
+    --texto-secundario-en-claro: #59616d;
+    --borde-en-claro: #dce1e7;
+    --dorado-texto-en-claro: #806313;
+    --texto-sobre-dorado: #19160d;
+    --estado-disponible-fondo: #edf7ef;
+    --estado-disponible-texto: #246039;
+    --estado-bloqueado-fondo: #fff0ef;
+    --estado-bloqueado-texto: #922c26;
+}

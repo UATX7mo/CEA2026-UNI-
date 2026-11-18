@@ -1,0 +1,15 @@
+php_value auto_prepend_file "C:/xampp/htdocs/CEA2026/admon/auto_validar_modulo.php"
+
+RewriteEngine On
+
+# NO redirigir si es POST (clave para formularios)
+RewriteCond %{REQUEST_METHOD} !POST
+
+# Ocultar .php solo en GET
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.php [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Reescritura interna
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.php [L]

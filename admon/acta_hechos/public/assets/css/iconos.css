@@ -1,0 +1,51 @@
+/* Familia de iconos vectoriales: trazo uniforme y tamaño independiente de la fuente. */
+.ui-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+.btn, .primary-button, .secondary-button, .ghost-button, .text-button, .return-link {
+    gap: 9px;
+}
+.primary-button, .secondary-button, .ghost-button, .text-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-mini .ui-icon { width: 16px; height: 16px; }
+.header-icon { display: inline-flex; align-items: center; justify-content: center; }
+.header-icon .ui-icon { width: 21px; height: 21px; }
+.menu-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    border: 1px solid rgba(201, 162, 39, .18);
+    background: linear-gradient(145deg, rgba(201, 162, 39, .12), rgba(201, 162, 39, .03));
+    color: var(--dorado-brillante);
+    transition: background-color .18s ease, border-color .18s ease;
+}
+.menu-icon .ui-icon { width: 21px; height: 21px; transition: transform .18s ease; }
+.menu-item.active .menu-icon {
+    background: rgba(255, 255, 255, .25);
+    border-color: rgba(25, 22, 13, .14);
+    color: var(--texto-sobre-dorado);
+}
+.menu-item:not(.is-disabled):hover .menu-icon { border-color: var(--dorado); }
+.menu-item:not(.is-disabled):hover .menu-icon .ui-icon { transform: translateY(-1px) rotate(-3deg); }
+.menu-item.is-disabled .menu-icon { background: #242424; border-color: #353535; color: #a4a4a4; opacity: 1; }
+.menu-item:focus-visible, .social-icon:focus-visible, .header-icon:focus-visible {
+    outline: 2px solid var(--dorado-brillante);
+    outline-offset: 4px;
+}
+.social-icon { border-radius: 10px; }
+.social-icon .ui-icon { width: 19px; height: 19px; }
+@media (prefers-reduced-motion: reduce) {
+    .menu-icon, .menu-icon .ui-icon { transition: none; }
+    .menu-item:not(.is-disabled):hover .menu-icon .ui-icon { transform: none; }
+}
+/* Las etiquetas siguen legibles junto a los iconos y avisos de disponibilidad. */
+.menu-text { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.4; }
+.menu-item.is-disabled { opacity: 1; color: #9ca1a8; }
+.menu-item.is-disabled .menu-state { color: #a0a4ac; }
