@@ -1,0 +1,179 @@
+/* El mismo marco institucional en el portal, acceso y gestión. Selectores propios
+   para no alterar formularios, tablas, Bootstrap ni el documento imprimible. */
+.cea-header, .cea-footer {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    color: #fff;
+    background: linear-gradient(90deg, #000, #1a1a1a);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+}
+.cea-header *, .cea-footer * { box-sizing: border-box; }
+.cea-header { position: relative; z-index: 1000; border-bottom: 2px solid #c9a227; box-shadow: 0 4px 10px #0009; }
+.cea-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 0; width: 100%; padding: 8px 12px; }
+.cea-brand { display: inline-flex; flex-shrink: 0; margin-right: 8px; }
+.cea-brand img { display: block; width: 70px; height: 70px; object-fit: contain; }
+.cea-menu, .cea-links, .cea-actions { display: flex; align-items: center; }
+.cea-menu { flex: 1; min-width: 0; justify-content: space-between; gap: 16px; }
+.cea-links { flex-wrap: wrap; }
+.cea-nav-link { display: block; padding: 8px; color: #fff; font: inherit; text-decoration: none; white-space: nowrap; }
+.cea-header a:hover, .cea-dropdown > summary:hover { color: #ffd700; }
+.cea-dropdown { position: relative; margin: 0; }
+.cea-dropdown > summary { display: flex; align-items: center; gap: 6px; list-style: none; cursor: pointer; }
+.cea-dropdown > summary::-webkit-details-marker { display: none; }
+.cea-dropdown > summary::after { content: ""; border-top: 5px solid; border-right: 5px solid transparent; border-left: 5px solid transparent; }
+.cea-dropdown-menu { position: absolute; top: 100%; left: 0; z-index: 1; min-width: 170px; padding: 8px 0; border: 1px solid #c9a227; border-radius: 4px; background: #111; box-shadow: 0 8px 20px #0006; }
+.cea-dropdown-menu a { display: block; padding: 4px 16px; color: #ddd; text-decoration: none; white-space: nowrap; }
+.cea-dropdown-menu a:hover { color: #000; background: #c9a227; }
+.cea-actions { gap: 12px; }
+.cea-login { display: inline-block; padding: 6px 12px; border: 1px solid #0d6efd; border-radius: 4px; color: #fff; background: #0d6efd; font: inherit; text-decoration: none; }
+.cea-header .cea-login:hover { color: #fff; background: #0b5ed7; border-color: #0a58ca; }
+.cea-menu-toggle { display: none; padding: 4px 12px; border: 1px solid #ffffff40; border-radius: 4px; color: #ddd; background: transparent; font: inherit; font-size: 28px; line-height: 1.25; cursor: pointer; }
+.cea-account { display: flex; align-items: center; gap: 10px; min-width: 0; color: #fff; text-decoration: none; }
+.cea-avatar { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: #c9a227; color: #19160d; font-size: 14px; font-weight: 700; }
+.cea-account-info { display: flex; flex-direction: column; max-width: 180px; }
+.cea-account-info strong { overflow: hidden; font-size: 13px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.cea-account-info > span { color: #bfc1c5; font-size: 11px; }
+.cea-logout { margin: 0; }
+.cea-session-button { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid #444; border-radius: 4px; background: transparent; color: #fff; cursor: pointer; }
+.cea-session-button:hover { border-color: #c9a227; color: #ffd700; }
+.cea-session-button .ui-icon { width: 22px; height: 22px; }
+/* Control integrado: cabecera del menú abierto y pestaña al contraerlo. */
+.cea-sidebar-shell { display: flex; flex-direction: column; flex-shrink: 0; width: 245px; background: linear-gradient(180deg, #1c1c1c, #111); border-right: 1px solid #343126; }
+.cea-sidebar-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 24px 18px 20px; }
+.cea-sidebar-heading-copy { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cea-sidebar-heading-copy > span { color: #bda35c; font: 600 9px/1.4 Arial, sans-serif; letter-spacing: .15em; }
+.cea-sidebar-heading-copy > strong { color: #ece9df; font: 600 14px/1.3 Arial, sans-serif; }
+.cea-sidebar-toggle { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 34px; height: 34px; padding: 0; border: 1px solid #494331; border-radius: 10px; background: #28251d; color: #d6bd78; box-shadow: 0 2px 6px #0003; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.cea-sidebar-toggle[hidden], .cea-shell .sidebar[hidden] { display: none; }
+.cea-sidebar-toggle:hover { border-color: #b99b45; background: #38301e; color: #ffe098; }
+.cea-sidebar-toggle:focus-visible { outline: 2px solid #c9a227; outline-offset: 4px; }
+.cea-sidebar-toggle .ui-icon { width: 20px; height: 20px; }
+.cea-sidebar-toggle[aria-expanded="false"] .ui-icon { transform: rotate(180deg); }
+.cea-sidebar-shell .sidebar { width: 100%; flex: 1; padding-top: 0; background: transparent; }
+.cea-sidebar-rail-label { display: none; }
+.cea-sidebar-shell.is-collapsed { width: 56px; }
+.cea-sidebar-shell.is-collapsed .cea-sidebar-heading { flex-direction: column; padding: 22px 10px; gap: 20px; }
+.cea-sidebar-shell.is-collapsed .cea-sidebar-heading-copy { display: none; }
+.cea-sidebar-shell.is-collapsed .cea-sidebar-rail-label { display: block; writing-mode: vertical-rl; color: #8f866b; font: 600 9px/1 Arial, sans-serif; letter-spacing: .2em; }
+@media (min-width: 801px) and (max-width: 1050px) { .cea-sidebar-shell:not(.is-collapsed) { width: 210px; } }
+@media (max-width: 800px) {
+    .cea-sidebar-shell, .cea-sidebar-shell.is-collapsed { width: 100%; border-right: 0; border-bottom: 1px solid #343126; }
+    .cea-sidebar-heading, .cea-sidebar-shell.is-collapsed .cea-sidebar-heading { flex-direction: row; padding: 14px 18px; }
+    .cea-sidebar-shell.is-collapsed .cea-sidebar-heading-copy { display: flex; }
+    .cea-sidebar-shell.is-collapsed .cea-sidebar-rail-label { display: none; }
+    .cea-sidebar-shell .sidebar { padding-bottom: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .cea-sidebar-toggle { transition: none; } }
+.cea-footer { padding: 24px 0 0; border-top: 2px solid #c9a227; box-shadow: 0 -5px 15px #0009; }
+.cea-footer-container { width: 100%; margin: 0 auto; padding: 0 12px; }
+.cea-footer-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 -12px; }
+.cea-footer-section { min-width: 0; margin-bottom: 16px; padding: 0 12px; }
+.cea-footer h2 { margin: 0 0 8px; color: #fff; font: 500 20px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; letter-spacing: normal; }
+.cea-footer h2.cea-text-gold { color: #c9a227; }
+.cea-footer p { margin: 0 0 16px; color: #fff; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.cea-footer a { color: #fff; text-decoration: none; }
+.cea-footer a:hover { color: #fff; text-decoration: underline; }
+.cea-footer .cea-social { display: flex; align-items: center; gap: 6px; width: fit-content; margin-bottom: 5px; font-size: 16px; }
+.cea-social .ui-icon { width: 19px; height: 19px; flex-shrink: 0; }
+.cea-social-facebook .ui-icon { color: #1877f2; }
+.cea-social-instagram .ui-icon { color: #e1306c; }
+.cea-social-youtube .ui-icon { color: #ff0000; }
+.cea-footer hr { height: 1px; margin: 16px 0; border: 0; background: #6c757d; opacity: .5; }
+.cea-footer .cea-copyright { margin: 0; padding-bottom: 16px; text-align: center; font-size: 16px; }
+.cea-footer :is(h2, p, a, small, strong, span) { color: #fff !important; }
+.cea-footer .cea-social-facebook .ui-icon { color: #1877f2 !important; }
+.cea-footer .cea-social-instagram .ui-icon { color: #e1306c !important; }
+.cea-footer .cea-social-youtube .ui-icon { color: #ff0000 !important; }
+
+/* Superficies de contenido claras para las secciones del sistema de actas. */
+.cea-shell .app,
+.cea-shell .app .main,
+.cea-shell .save-page {
+    background: #fff;
+    color: #20252c;
+}
+.cea-shell .app .main .card,
+.cea-shell .app .main .card-header,
+.cea-shell .app .main .card-body,
+.cea-shell .app .main .option-card,
+.cea-shell .app .main .signature,
+.cea-shell .app .main .filters-form,
+.cea-shell .app .main .actas-table-container,
+.cea-shell .app .main .actas-table tbody tr,
+.cea-shell .app .main .preview-modal-dialog,
+.cea-shell .save-card {
+    background: #fff;
+    color: #20252c;
+    border-color: #dce1e7;
+    box-shadow: 0 8px 24px rgba(17, 24, 39, .07);
+}
+.cea-shell .app .main .card-header { border-bottom-color: #e6e9ee; }
+.cea-shell .app .main .card-header,
+.cea-shell .app .main .card-body { box-shadow: none; }
+.cea-shell .app .main :is(.card-header h3, .card-header p, .page-header h2, .page-header p, label, .field-group label, .option-info strong, .option-info span, .signature-line, .muted-note, .paginador-texto, .actas-secondary, .actas-student-name, .actas-enrollment, .actas-level, .actas-author, .actas-empty, .actas-empty strong, .actas-empty span),
+.cea-shell .save-card :is(h1, p, dt, dd, small) {
+    color: #20252c;
+}
+.cea-shell .app .main :is(input, select, textarea, .field-group input, .field-group select),
+.cea-shell .app .main :is(input, select, textarea):focus {
+    background: #fff;
+    color: #20252c;
+    border-color: #cbd2dc;
+}
+.cea-shell .app .main :is(input, textarea)::placeholder { color: #6b7280; }
+.cea-shell .app .main .option-card:hover { background: #f8f9fb; }
+.cea-shell .app .main .option-card.selected { background: #fff8df; border-color: #c9a227; }
+.cea-shell .app .main .actas-table th { background: #f1f3f6; color: #303640; border-color: #dce1e7; }
+.cea-shell .app .main .actas-table td { color: #303640; border-color: #e2e6ec; }
+.cea-shell .app .main .actas-table tbody tr:nth-child(even) { background: #f8f9fb; }
+.cea-shell .app .main .actas-table tbody tr:hover,
+.cea-shell .app .main .actas-table tbody tr:focus-within { background: #eef2f6; }
+.cea-shell .app .main .actas-folio { color: #806313; }
+.cea-shell .app .main .actas-reason { background: #fff8df; color: #604b12; border-color: #e6d597; }
+.cea-shell .app .main .actas-actions .actas-preview { background: #fff8df; color: #604b12; border-color: #e6d597; }
+.cea-shell .app .main .actas-actions .actas-delete { background: #fff1f0; color: #8b302a; border-color: #e6bbb7; }
+.cea-shell .app .main .actas-actions .actas-preview:hover { background: #f8edc8; color: #4d3b0d; }
+.cea-shell .app .main .actas-actions .actas-delete:hover { background: #fbe1df; color: #72221d; }
+.cea-shell .app .main .form-status[data-tipo="error"] { color: #9b2c2c; }
+.cea-shell .app .main .form-status[data-tipo="success"] { color: #246039; }
+.cea-shell .app .main .form-status[data-tipo="loading"] { color: #59616d; }
+.cea-shell .save-card .save-summary div { background: #f8f9fb; border-color: #dce1e7; }
+.cea-shell .save-card .save-error { color: #806313; }
+.cea-copyright small { font-size: .875em; }
+.cea-header :is(a, button, summary):focus-visible, .cea-footer a:focus-visible { outline: 3px solid #c9a227; outline-offset: 3px; }
+
+/* Las tarjetas y la aplicación llenan el espacio entre el encabezado y el pie. */
+body.cea-shell { display: flex; flex-direction: column; min-height: 100vh; margin: 0; background: #fff; }
+.cea-shell > main { flex: 1; }
+.cea-shell > .app { display: flex; flex-direction: column; flex: 1; min-height: 100vh; overflow: visible; }
+.cea-shell > .app::before, .cea-shell > .app::after { content: none; }
+.cea-shell .layout { flex: 1; min-height: calc(100vh - 88px); }
+.cea-shell > :is(.save-page, .lock-page, .maintenance-page, .app-shell) { min-height: calc(100vh - 88px); }
+.cea-shell .save-page { padding-top: 48px; padding-bottom: 48px; }
+
+@media (min-width: 576px) { .cea-footer-container { max-width: 540px; } }
+@media (min-width: 768px) { .cea-footer-container { max-width: 720px; } }
+@media (min-width: 992px) { .cea-footer-container { max-width: 960px; } }
+@media (min-width: 1200px) { .cea-footer-container { max-width: 1140px; } }
+@media (min-width: 1400px) { .cea-footer-container { max-width: 1320px; } }
+@media (min-width: 768px) and (max-width: 1100px) {
+    .cea-account-info { display: none; }
+    .cea-actions { gap: 8px; }
+    .cea-menu { gap: 8px; }
+}
+@media (max-width: 767.98px) {
+    .cea-menu-toggle { display: block; margin-left: auto; }
+    .cea-menu { display: none; flex: 0 0 100%; align-items: stretch; padding-top: 8px; }
+    .cea-menu.is-open { display: flex; flex-direction: column; gap: 12px; }
+    .cea-links { flex-direction: column; align-items: stretch; }
+    .cea-dropdown-menu { position: static; margin: 0 8px 8px; }
+    .cea-actions { flex-wrap: wrap; padding: 0 8px 8px; }
+    .cea-account-info { max-width: 155px; }
+    .cea-footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .cea-footer .cea-social { margin-left: auto; margin-right: auto; }
+}
+@media print { .cea-header, .cea-footer { display: none; } }

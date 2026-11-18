@@ -1,0 +1,60 @@
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--gris-fondo, #e8e8e8); color: #171717; font-family: Arial, Helvetica, sans-serif; }
+.preview-header { padding: 22px 32px; background: var(--negro, #161616); color: white; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.preview-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #ccc; }
+.preview-header h1 { margin: 5px 0 8px; font-size: 24px; }
+.preview-header p { margin: 0; max-width: 640px; color: #ddd; font-size: 13px; line-height: 1.5; }
+.preview-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.preview-zoom { display: inline-flex; align-items: center; gap: 4px; padding: 4px; background: #292929; border: 1px solid #555; border-radius: 8px; }
+.preview-tool { width: 34px; height: 34px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: white; font: 700 20px/1 Arial, sans-serif; cursor: pointer; }
+.preview-tool:hover { background: #444; }
+.preview-tool:focus-visible { outline: 3px solid #b58b40; outline-offset: 2px; }
+.preview-zoom-value { min-width: 52px; color: white; font-size: 12px; font-weight: 700; text-align: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 42px; padding: 10px 18px; border: 1px solid transparent; border-radius: 8px; font: 600 13px Arial, sans-serif; text-decoration: none; cursor: pointer; }
+.btn-secondary { background: #292929; color: white; border-color: #555; }
+.btn-primary { background: var(--vino, #ffd700); color: var(--texto-sobre-dorado, #151515); }
+.btn:disabled { opacity: .6; cursor: wait; }
+.preview-tool:disabled { opacity: .45; cursor: wait; }
+.btn:focus-visible { outline: 3px solid #b58b40; outline-offset: 3px; }
+.preview-warnings { max-width: 900px; margin: 16px auto; padding: 14px 20px; background: #fff8df; border: 1px solid #b58b40; border-radius: 8px; font-size: 13px; line-height: 1.5; }
+.preview-warnings p { margin: 4px 0 0; }
+.preview-warnings ul { margin: 8px 0 0; padding-left: 22px; }
+.document-area { padding: 28px 16px 60px; overflow: auto; zoom: var(--preview-zoom, 1); }
+
+/* La misma caja física se utiliza para medir, previsualizar e imprimir. */
+.pdf-page { position: relative; isolation: isolate; width: 8.5in; height: 11in; padding: 40mm 22mm 35mm; margin: 0 auto 24px; background: white; box-shadow: 0 8px 32px #0003; }
+.letterhead { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.plain-letterhead { position: absolute; top: 16mm; left: 22mm; right: 22mm; text-align: center; font-size: 18pt; font-weight: bold; }
+.page-metadata { position: absolute; top: 32mm; left: 22mm; right: 22mm; display: flex; justify-content: space-between; gap: 10mm; color: #333; font-size: 8pt; line-height: 1.2; }
+.page-metadata > span { max-width: 52%; overflow-wrap: anywhere; }
+.page-metadata > span:last-child { text-align: right; }
+.page-metadata [data-page-matricula] { word-break: break-all; }
+.document-content { height: 100%; display: flow-root; font: 12pt/1.35 Arial, Helvetica, sans-serif; overflow-wrap: anywhere; }
+.document-source { width: 8.5in; margin: auto; padding: 38mm 22mm 35mm; background: white; font: 12pt/1.35 Arial, Helvetica, sans-serif; overflow-wrap: anywhere; }
+.document-title { margin: 0 0 9mm; text-align: center; font-size: 14pt; line-height: 1.2; font-weight: 700; }
+.document-paragraph, .document-block { margin: 0 0 6mm; text-align: justify; }
+.document-block p { margin: 0; }
+.document-block h2 { margin: 0 0 3mm; font: inherit; font-weight: 700; text-align: left; }
+.document-block .reason { margin-top: 3mm; }
+.narrative { white-space: pre-wrap; tab-size: 4; }
+.signature { width: 75mm; max-width: 100%; margin: 23mm auto 0; border-top: 1px solid #222; text-align: center; padding-top: 2mm; }
+.draft-mark { position: absolute; left: 7%; right: 7%; top: 49%; transform: rotate(-25deg); text-align: center; font-size: 25pt; font-weight: 700; color: #555; opacity: .17; pointer-events: none; }
+.page-number { position: absolute; bottom: 29mm; left: 22mm; right: 22mm; text-align: right; font-size: 8pt; color: #333; }
+
+@media (max-width: 700px) {
+    .preview-header { padding: 18px; flex-direction: column; align-items: flex-start; }
+    .preview-actions { width: 100%; flex-wrap: wrap; }
+    .preview-actions .btn { flex: 1; }
+    .preview-warnings { margin-left: 12px; margin-right: 12px; }
+}
+
+@page { size: Letter; margin: 0; }
+@media print {
+    .document-area { zoom: 1; }
+    html, body { width: 8.5in; margin: 0; background: white; }
+    .preview-header, .preview-warnings, noscript, .document-source { display: none !important; }
+    .document-area { margin: 0; padding: 0; overflow: visible; }
+    .pdf-page { margin: 0; box-shadow: none; break-after: page; break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .pdf-page:last-child { break-after: auto; }
+}

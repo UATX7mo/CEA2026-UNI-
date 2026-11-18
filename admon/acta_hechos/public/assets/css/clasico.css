@@ -1,0 +1,27 @@
+/* Presentación original de las páginas administrativas, sin menú lateral. */
+.cea-admin-header { flex-shrink: 0; position: relative; z-index: 1000; }
+.cea-admin-header .logo { width: 50px; height: 50px; object-fit: contain; }
+.cea-admin-header .navbar-custom { background: linear-gradient(90deg,#000,#1a1a1a); border-bottom: 2px solid #c9a227; box-shadow: 0 4px 10px #0009; }
+.cea-admin-header .nav-link { font-size: 14px; }
+.cea-admin-header form { margin: 0; }
+.layout-sin-sidebar { display: block; width: 100%; }
+.layout-sin-sidebar > .main { width: 100%; max-width: none; min-width: 0; margin: 0; }
+body.cea-gestion-clasica { background: #fff; color: #212529; font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+.cea-gestion-clasica .gestion-main { padding-top: 64px; padding-bottom: 64px; }
+.cea-gestion-clasica .gestion-panel { margin-bottom: 28px; padding: 0; border: 0; background: transparent; border-radius: 0; }
+.cea-gestion-clasica .gestion-panel h2 { font-size: 1.5rem; }
+.cea-gestion-clasica .gestion-panel-title, .cea-gestion-clasica .gestion-filters, .cea-gestion-clasica .gestion-toolbar, .cea-gestion-clasica .gestion-pagination, .cea-gestion-clasica .gestion-form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 24px; }
+.cea-gestion-clasica .gestion-panel-title { justify-content: space-between; }
+.cea-gestion-clasica .gestion-filters { align-items: end; }.cea-gestion-clasica .gestion-filters > div { flex: 1; }
+.cea-gestion-clasica .gestion-form { display: grid; gap: 24px; }.cea-gestion-clasica .gestion-form-grid, .cea-gestion-clasica .gestion-details { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+.cea-gestion-clasica .gestion-form legend { font-size: 1.5rem; margin-bottom: 16px; }
+.cea-gestion-clasica .gestion-main label { display: block; margin-bottom: 8px; }
+.cea-gestion-clasica .gestion-main :is(input:not([type=checkbox]):not([type=hidden]),select,textarea) { display: block; width: 100%; padding: .375rem .75rem; color: #212529; background: #fff; border: 1px solid #ced4da; border-radius: .25rem; font: inherit; }
+.cea-gestion-clasica .gestion-main textarea { resize: vertical; }
+.cea-gestion-clasica .gestion-table-scroll { overflow: auto; }.cea-gestion-clasica .gestion-table { border-collapse: collapse; width: 100%; }.cea-gestion-clasica .gestion-table :is(th,td) { padding: .5rem; border: 1px solid #dee2e6; }.cea-gestion-clasica .gestion-table small { display: block; }
+.cea-gestion-clasica .gestion-row-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.cea-gestion-clasica .gestion-alert { padding: 12px 16px; background: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; margin-bottom: 20px; border-radius: .25rem; }.cea-gestion-clasica .gestion-error { background: #f8d7da; color: #842029; border-color: #f5c2c7; }
+.cea-gestion-clasica .gestion-muted { color: #6c757d; }.cea-gestion-clasica .gestion-empty { padding: 24px; text-align: center; }.cea-gestion-clasica .gestion-notice-text { white-space: pre-wrap; }.cea-gestion-clasica .gestion-notice-image { max-width: 100%; max-height: 400px; object-fit: contain; }
+.cea-gestion-clasica .gestion-check { display: flex; align-items: center; gap: 8px; }.cea-gestion-clasica .gestion-pagination { justify-content: flex-end; }
+.gestion-skip { position: absolute; top: -100px; left: 10px; z-index: 2000; }.gestion-skip:focus { top: 10px; padding: 10px; background: #fff; }
+@media(max-width:767px) { .cea-gestion-clasica .gestion-form-grid,.cea-gestion-clasica .gestion-details { grid-template-columns: 1fr; }.cea-gestion-clasica .gestion-main { padding-top: 40px; }.cea-admin-header .navbar-collapse { padding-top: 12px; }.cea-admin-header .mx-auto { text-align: left !important; margin: 12px 0 !important; } }

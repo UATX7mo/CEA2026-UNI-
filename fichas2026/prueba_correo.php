@@ -1,0 +1,211 @@
+<?php
+
+try {
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+    // include_once '../complementos/conexion1.php';
+
+    include_once '../complementos/conexion_fichas.php';
+
+    if (
+        !isset($_POST['token'])
+        || !isset($_SESSION['token'])
+        || !hash_equals($_SESSION['token'], $_POST['token'])
+    ) {
+        exit('Acceso inválido');
+    }
+
+    unset($_SESSION['token']);
+
+    $nombre_alum = $_POST['nombre_alum'];
+    $ape_pat = $_POST['ape_pat'];
+    $ape_mat = $_POST['ape_mat'];
+    $curp_alum = $_POST['curp_alum'];
+    $sexo = $_POST['sexo'];
+    $nacimiento_alum = $_POST['nacimiento_alum'];
+    $muni_alum_nac = $_POST['muni_alum_nac'];
+    $estado_alum_nac = $_POST['estado_alum_nac'];
+
+    $calle_alum = $_POST['calle_alum'];
+    $colo_alum = $_POST['colo_alum'];
+    $muni_alum_rad = $_POST['muni_alum_rad'];
+    $estado_alum_rad = $_POST['estado_alum_rad'];
+    $cp = $_POST['cp'];
+    $tel_casa_alum = $_POST['tel_casa_alum'];
+    $tel_cel_alum = $_POST['tel_cel_alum'];
+
+    $alergias = $_POST['alergias'];
+    $sangre = $_POST['sangre'];
+    $peso = $_POST['peso'];
+    $talla = $_POST['talla'];
+    $enfermedades = $_POST['enfermedades'];
+
+    $grado = $_POST['grado'];
+    $grupo = $_POST['grupo'];
+    $escuela_proce = $_POST['escuela_proce'];
+    $nivel = 'PREESCOLAR';
+    $grado1 = !empty($_POST['r1']) ? 'SI' : 'NO';
+    $grado2 = !empty($_POST['r2']) ? 'SI' : 'NO';
+    $grado3 = !empty($_POST['r3']) ? 'SI' : 'NO';
+
+    $religion = $_POST['religion'];
+    $bautismo = !empty($_POST['Bautismo']) ? 'SI' : 'NO';
+    $eucaristia = !empty($_POST['Eucaristia']) ? 'SI' : 'NO';
+    $confirmacion = !empty($_POST['Confirmacion']) ? 'SI' : 'NO';
+
+    $curp_papa = $_POST['curp_papa'] ?? '';
+    $nombre_papa = $_POST['nombre_papa'] ?? '';
+    $nacimiento_papa = $_POST['nacimiento_papa'] ?? '';
+    $estado_papa = $_POST['estado_papa'] ?? '';
+    $calle_papa = $_POST['calle_papa'] ?? '';
+    $colonia_papa = $_POST['colonia_papa'] ?? '';
+    $estado_civ_papa = $_POST['estado_civ_papa'] ?? '';
+    $ocupacion_papa = $_POST['ocupacion_papa'] ?? '';
+    $escolaridad_papa = $_POST['escolaridad_papa'] ?? '';
+    $tel_casa_papa = $_POST['tel_casa_papa'] ?? '';
+    $email_papa = $_POST['email_papa'] ?? '';
+
+    $curp_mama = $_POST['curp_mama'] ?? '';
+    $nombre_mama = $_POST['nombre_mama'] ?? '';
+    $nacimiento_mama = $_POST['nacimiento_mama'] ?? '';
+    $estado_mama = $_POST['estado_mama'] ?? '';
+    $calle_mama = $_POST['calle_mama'] ?? '';
+    $colo_mama = $_POST['colo_mama'] ?? '';
+    $civil_mama = $_POST['civil_mama'] ?? '';
+    $ocupacion_mama = $_POST['ocupacion_mama'] ?? '';
+    $esco_mama = $_POST['esco_mama'] ?? '';
+    $tel_casa_mama = $_POST['tel_casa_mama'] ?? '';
+    $email_mama = $_POST['email_mama'] ?? '';
+
+    $curp_tutor = $_POST['curp_tutor'] ?? '';
+    $nombre_tutor = $_POST['nombre_tutor'] ?? '';
+    $nacimiento_tutor = $_POST['nacimiento_tutor'] ?? '';
+    $estado_tutor = $_POST['estado_tutor'] ?? '';
+    $calle_tutor = $_POST['calle_tutor'] ?? '';
+    $colo_tutor = $_POST['colo_tutor'] ?? '';
+    $estado_civ_tutor = $_POST['estado_civ_tutor'] ?? '';
+    $ocupacion_tutor = $_POST['ocupacion_tutor'] ?? '';
+    $esco_tutor = $_POST['esco_tutor'] ?? '';
+    $tel_casa_tutor = $_POST['tel_casa_tutor'] ?? '';
+    $email_tutor = $_POST['email_tutor'] ?? '';
+
+    // Verificar CURP duplicado
+    $sql1 = 'SELECT * FROM preescolar WHERE curp = ?';
+    $stmt = $pdo->prepare($sql1);
+    $stmt->execute([$curp_alum]);
+
+    if ($stmt->rowCount() > 0) {
+        echo '2'; // CURP ya registrado
+        exit;
+    }
+
+    $sql = 'INSERT INTO preescolar(
+ nombre_alum,ape_pat, ape_mat, curp, sexo, fech_nacimiento,
+ mun_nac,estado_nac,calle, colonia, municipio, estado, cp, tel_casa, tel_cel,
+alergias,tipo_sangre,peso, talla,enfermedades,grado,grupo, esc_proce, nivel,
+     grado1, grado2, grado3,  religion, bautismo, comunion, confirmacion,
+    curp_papa, nombre_papa, fecha_nac_papa, edo_naci_papa, calle_papa,
+    colonia_papa, civil_papa, ocupacion_papa, escol_papa, tel_papa, correo_papa,
+    curp_mama, nombre_mama, fecha_nac_mama, nacimiento_mama, calle_mama,
+    colonia_mama, civil_mama, ocupacion_mama, escolaridad_mama, tel_mama, correo_mama,
+    curp_tutor, nombre_tutor, nac_tutor, nacimiento_tutor, calle_tutor,
+    colonia_tutor, civil_tutor, ocupacion_tutor, escolaridad_tutor, tel_tutor, correo_tutor
+   
+) VALUES (
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+)';
+
+    $insertar = $pdo->prepare($sql);
+
+    $insertar->execute([
+        mb_strtoupper($nombre_alum),
+        mb_strtoupper($ape_pat),
+        mb_strtoupper($ape_mat),
+        mb_strtoupper($curp_alum),
+        mb_strtoupper($sexo),
+        $nacimiento_alum,
+        mb_strtoupper($muni_alum_nac),
+        mb_strtoupper($estado_alum_nac),
+
+        mb_strtoupper($calle_alum),
+        mb_strtoupper($colo_alum),
+        mb_strtoupper($muni_alum_rad),
+        mb_strtoupper($estado_alum_rad),
+        $cp,
+        $tel_casa_alum,
+        $tel_cel_alum,
+
+        mb_strtoupper($alergias),
+        mb_strtoupper($sangre),
+        $peso,
+        $talla,
+        mb_strtoupper($enfermedades),
+
+        $grado,
+        $grupo,
+        mb_strtoupper($escuela_proce),
+        mb_strtoupper($nivel),
+        $grado1,
+        $grado2,
+        $grado3,
+
+        mb_strtoupper($religion),
+        mb_strtoupper($bautismo),
+        mb_strtoupper($eucaristia),
+        mb_strtoupper($confirmacion),
+
+        mb_strtoupper($curp_papa),
+        mb_strtoupper($nombre_papa),
+        $nacimiento_papa,
+        mb_strtoupper($estado_papa),
+        mb_strtoupper($calle_papa),
+        mb_strtoupper($colonia_papa),
+        mb_strtoupper($estado_civ_papa),
+        mb_strtoupper($ocupacion_papa),
+        mb_strtoupper($escolaridad_papa),
+        $tel_casa_papa,
+        $email_papa,
+
+        mb_strtoupper($curp_mama),
+        mb_strtoupper($nombre_mama),
+        $nacimiento_mama,
+        mb_strtoupper($estado_mama),
+        mb_strtoupper($calle_mama),
+        mb_strtoupper($colo_mama),
+        mb_strtoupper($civil_mama),
+        mb_strtoupper($ocupacion_mama),
+        mb_strtoupper($esco_mama),
+        $tel_casa_mama,
+        $email_mama,
+
+        mb_strtoupper($curp_tutor),
+        mb_strtoupper($nombre_tutor),
+        $nacimiento_tutor,
+        mb_strtoupper($estado_tutor),
+        mb_strtoupper($calle_tutor),
+        mb_strtoupper($colo_tutor),
+        mb_strtoupper($estado_civ_tutor),
+        mb_strtoupper($ocupacion_tutor),
+        mb_strtoupper($esco_tutor),
+        $tel_casa_tutor,
+        $email_tutor,
+    ]);
+
+    echo '1';
+} catch (PDOException $e) {
+    echo '0';  // o: echo "Error: " . UPPER($e->getMessage();
+}
+//  header("Location: busca_preescolar.php");
+//     exit();
+
+// } catch (PDOException $e) {
+//      if ($e->errorInfo[1] == 1062) {
+//         header("Location: formulario.php?error=curp_duplicada");
+//     } else {
+//         header("Location: formulario.php?error=general");
+//     }
+//     exit();
+// }

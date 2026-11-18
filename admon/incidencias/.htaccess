@@ -1,0 +1,3 @@
+<FilesMatch "^(Conexion\.php|acceso\.php|Tabla\.sql)$">
+    Require all denied
+</FilesMatch>
